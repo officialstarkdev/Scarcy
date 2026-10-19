@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-ink text-cream font-body antialiased;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 8% -5%, rgba(237, 230, 216, 0.05), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 95% 15%, rgba(217, 164, 65, 0.06), transparent 55%),
+    radial-gradient(ellipse 45% 30% at 20% 110%, rgba(237, 230, 216, 0.04), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* subtle chalkboard grain, like the flour-dusted slate in the reference */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.86 0 0 0 0 0.78 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { @apply bg-gold text-ink; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0b0b0e; }
+::-webkit-scrollbar-thumb { background: #2a2a33; border-radius: 8px; border: 2px solid #0b0b0e; }
+::-webkit-scrollbar-thumb:hover { background: #d9a441; }
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10; }
+
+  .eyebrow { @apply font-script text-3xl sm:text-4xl text-gold leading-none; }
+
+  .h-display { @apply font-display font-bold tracking-tight text-cream; }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3 font-medium text-ink
+    transition-all duration-300 hover:bg-goldlight hover:shadow-gold active:scale-95
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold
+    disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-gold/40 px-7 py-3
+    font-medium text-gold transition-all duration-300 hover:border-gold hover:bg-gold/10 active:scale-95
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
+  }
+
+  .card { @apply rounded-2xl border border-white/5 bg-coal shadow-card; }
+
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-slate2 px-4 py-3 text-cream placeholder:text-muted/60
+    outline-none transition focus:border-gold/60 focus:ring-1 focus:ring-gold/40;
+  }
+
+  .label { @apply mb-1.5 block text-sm font-medium text-muted; }
+
+  .divider-wheat {
+    @apply mx-auto my-4 flex items-center justify-center gap-3 text-gold/70;
+  }
+  .divider-wheat::before,
+  .divider-wheat::after {
+    content: '';
+    @apply h-px w-14 bg-gradient-to-r from-transparent via-gold/50 to-transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

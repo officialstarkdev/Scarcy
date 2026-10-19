@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream font-body text-ink antialiased;
+  background-image:
+    radial-gradient(ellipse 70% 45% at 100% 0%, rgba(217, 224, 168, 0.35), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(233, 226, 210, 0.55), transparent 65%);
+  background-attachment: fixed;
+}
+
+/* very light paper grain over the cream background */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.23 0 0 0 0 0.18 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { @apply bg-sage text-forest; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #f3eee1; }
+::-webkit-scrollbar-thumb { background: #cfd3bd; border-radius: 8px; border: 2px solid #f3eee1; }
+::-webkit-scrollbar-thumb:hover { background: #1c3b2e; }
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10; }
+
+  /* dedicated font for prices with tabular alignment across the entire site */
+  .font-price {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* italic serif accent — "Good Food, Good Mood" */
+  .eyebrow {
+    @apply font-display text-2xl italic leading-none text-forestsoft sm:text-3xl;
+  }
+  .eyebrow-light {
+    @apply font-display text-2xl italic leading-none text-sage sm:text-3xl;
+  }
+
+  .h-display {
+    @apply font-display font-bold leading-[1.1] tracking-tight text-forest;
+  }
+  .h-display-light { @apply font-display font-bold leading-[1.1] tracking-tight text-cream; }
+
+  .lead { @apply text-muted; }
+
+  /* small caps label used above section titles */
+  .kicker {
+    @apply text-[11px] font-semibold uppercase tracking-[0.32em] text-forestsoft;
+  }
+
+  .btn-sage {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-sm font-medium text-forest
+    transition-all duration-300 hover:bg-sagehover hover:shadow-soft active:scale-[0.97]
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage
+    disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-forest {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream
+    transition-all duration-300 hover:bg-forestsoft hover:shadow-soft active:scale-[0.97]
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest
+    disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-forest/35 px-6 py-3 text-sm font-medium
+    text-forest transition-all duration-300 hover:border-forest hover:bg-forest hover:text-cream active:scale-[0.97]
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest
+    disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-outline-cream {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-cream/40 px-6 py-3 text-sm font-medium
+    text-cream transition-all duration-300 hover:border-cream hover:bg-cream/10 active:scale-[0.97]
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream
+    disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .card {
+    @apply rounded-2xl border border-sand bg-white shadow-soft;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-sand bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/60
+    outline-none transition focus:border-forest/50 focus:ring-2 focus:ring-forest/15;
+  }
+
+  .label { @apply mb-1.5 block text-xs font-medium uppercase tracking-wider text-muted; }
+
+  .divider-leaf {
+    @apply mx-auto my-4 flex items-center justify-center gap-3 text-forest/40;
+  }
+  .divider-leaf::before,
+  .divider-leaf::after {
+    content: '';
+    @apply h-px w-16 bg-gradient-to-r from-transparent via-forest/30 to-transparent;
+  }
+
+  /* decorative arch / blob used in the hero */
+  .arch {
+    border-radius: 9999px 9999px 32px 32px;
+  }
+
+  /* legacy class aliases so any un-migrated markup still reads well */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream
+    transition-all duration-300 hover:bg-forestsoft hover:shadow-soft active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-forest/35 px-6 py-3 text-sm font-medium
+    text-forest transition-all duration-300 hover:border-forest hover:bg-forest hover:text-cream active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .divider-wheat {
+    @apply mx-auto my-4 flex items-center justify-center gap-3 text-forest/40;
+  }
+  .divider-wheat::before,
+  .divider-wheat::after {
+    content: '';
+    @apply h-px w-16 bg-gradient-to-r from-transparent via-forest/30 to-transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
